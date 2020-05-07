@@ -1,13 +1,14 @@
 package userservice.service;
 
+
 import userservice.entity.User;
+
+import java.util.Optional;
 
 public interface UserService {
 
-    public User getLoggedInUser();
+    public Optional<User> userByEmailAndPassword(String email,String password);
 
-    public boolean userHasReadPermission(User user);
 
-    public boolean userHasWritePermission(User user);
 
 }
