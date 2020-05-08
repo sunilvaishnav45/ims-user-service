@@ -24,16 +24,15 @@ public class ServiceInterceptor implements HandlerInterceptor {
         String getURL = request.getRequestURI();
         String mehtodType = request.getMethod();
         String authToken = request.getHeader("token");
-//        if(authToken!=null && !authToken.isEmpty()){//Private Urls
-//            if(!jwtTokenUtil.isTokenExpired(authToken))
-//                return true;
-//        }else{//Public URL
-//            if(("/login").equalsIgnoreCase(getURL) && "POST".equalsIgnoreCase(mehtodType))
-//                return true;
-//        }
-//        //Token has experied or no token in header
-//        response.sendError(401);
-//        return false;
-        return true;
+        if(authToken!=null && !authToken.isEmpty()){//Private Urls
+            if(!jwtTokenUtil.isTokenExpired(authToken))
+                return true;
+        }else{//Public URL
+            if(("/login").equalsIgnoreCase(getURL) && "POST".equalsIgnoreCase(mehtodType))
+                return true;
+        }
+        //Token has experied or no token in header
+        response.sendError(401);
+        return false;
     }
 }
