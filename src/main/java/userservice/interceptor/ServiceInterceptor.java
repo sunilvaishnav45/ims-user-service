@@ -24,6 +24,7 @@ public class ServiceInterceptor implements HandlerInterceptor {
         String getURL = request.getRequestURI();
         String mehtodType = request.getMethod();
         String authToken = request.getHeader("token");
+        LOGGER.info("getURL "+getURL);
         if(authToken!=null && !authToken.isEmpty()){//Private Urls
             if(!jwtTokenUtil.isTokenExpired(authToken))
                 return true;
