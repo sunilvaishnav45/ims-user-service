@@ -29,7 +29,7 @@ public class ServiceInterceptor implements HandlerInterceptor {
             if(!jwtTokenUtil.isTokenExpired(authToken))
                 return true;
         }else{//Public URL
-            if(("/login").equalsIgnoreCase(getURL) && "POST".equalsIgnoreCase(mehtodType))
+            if((("/login").equalsIgnoreCase(getURL) || ("/user-service/login").equalsIgnoreCase(getURL)) && "POST".equalsIgnoreCase(mehtodType))
                 return true;
         }
         //Token has experied or no token in header
