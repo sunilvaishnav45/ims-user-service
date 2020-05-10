@@ -22,14 +22,11 @@ public class ServiceInterceptor implements HandlerInterceptor {
             (HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
         String getURL = request.getRequestURI();
-        String mehtodType = request.getMethod();
         String authToken = request.getHeader("token");
-        LOGGER.info("getURL "+getURL);
-        if(authToken!=null && !authToken.isEmpty()){//Private Urls
-            if(!jwtTokenUtil.isTokenExpired(authToken))
-                return true;
+        if(authToken!=null && !authToken.isEmpty() && !jwtTokenUtil.isTokenExpired(authToken)){//Private Urls
+            return true;
         }else{//Public URL
-            if((("/login").equalsIgnoreCase(getURL) || ("/user-service/login").equalsIgnoreCase(getURL)) && "POST".equalsIgnoreCase(mehtodType))
+            if((("/login").equalsIgnoreCase(getURL)))
                 return true;
         }
         //Token has experied or no token in header
